@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.snowmanlabs.test.viewModel.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="500dp"
+            android:layout_height="700dp"
+            android:layout_gravity="center"
+            android:src="@drawable/logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="30dp"
+            android:elevation="2dp"
+            app:cardCornerRadius="12dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="200dp"
+                    android:layout_height="200dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="50dp"
+                    android:src="@drawable/snowman_challenge" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/signinFacebook"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="10dp"
+                    android:onClick="@{viewModel::signInWithFacebook}"
+                    android:padding="20dp"
+                    android:text="@string/sign_in"
+                    android:textAllCaps="false"
+                    android:textColor="#170087"
+                    android:textSize="16sp"
+                    android:textAlignment="center"
+                    app:cornerRadius="6dp"
+                    app:icon="@drawable/facebook_logo"
+                    app:iconPadding="12dp"
+                    app:iconSize="20dp"
+                    app:iconTint="@null"
+                    app:strokeColor="#000" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/signupFacebook"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|center"
+                    android:backgroundTint="#170087"
+                    android:onClick="@{viewModel::signInWithFacebook}"
+                    android:padding="20dp"
+                    android:text="@string/sign_up"
+                    android:textAllCaps="false"
+                    android:textColor="#fff"
+                    android:textSize="16sp"
+                    app:cornerRadius="6dp"
+                    app:icon="@drawable/facebook_logo_reverse"
+                    app:iconPadding="10dp"
+                    app:iconSize="20dp"
+                    app:iconTint="@null"
+                    app:strokeColor="#000" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

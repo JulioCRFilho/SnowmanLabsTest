@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "715120248730",
+    "firebase_url": "https://snowmantest-ef6aa.firebaseio.com",
+    "project_id": "snowmantest-ef6aa",
+    "storage_bucket": "snowmantest-ef6aa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:715120248730:android:7f695e40baa00f1e209c23",
+        "android_client_info": {
+          "package_name": "com.snowmanlabs.test"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "715120248730-bhnhbv7o4ja1qeim70gh41dk60egica6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5Ja7O9B6MKgJctd7arjsjsW-REHmpeB4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "715120248730-bhnhbv7o4ja1qeim70gh41dk60egica6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
