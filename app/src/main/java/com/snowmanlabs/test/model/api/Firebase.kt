@@ -5,7 +5,10 @@ import com.google.firebase.auth.FirebaseUser
 
 object Firebase {
     val mAuth= FirebaseAuth.getInstance()
-    val user: FirebaseUser? = mAuth.currentUser
+
+    fun getUser(): FirebaseUser? {
+        return mAuth.currentUser
+    }
 
     fun loggout() {
         mAuth.signOut()

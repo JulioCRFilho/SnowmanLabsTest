@@ -1,8 +1,5 @@
 package com.snowmanlabs.test.viewModel
 
-import android.app.Activity
-import android.content.Context
-import android.util.Log.d
 import android.view.View
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -41,19 +38,9 @@ class LoginViewModel : ViewModel(), LoginInterface.Router {
         })
     }
 
-    fun verifyUserLoggedIn(context: Context) {
-        Firebase.user?.let {
-            d("tatata", Firebase.user.email ?: "nada")
-            this.navigate(context)
-        }
-    }
-
     private fun handleFacebookAccessToken(accessToken: AccessToken?) {
-        d("tatata", "handling")
-
         accessToken?.let { access ->
             val credential = FacebookAuthProvider.getCredential(access.token)
-
             Firebase.mAuth.signInWithCredential(credential).addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     viewInterface.success()
