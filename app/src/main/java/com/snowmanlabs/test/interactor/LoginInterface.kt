@@ -2,8 +2,10 @@ package com.snowmanlabs.test.interactor
 
 import android.app.Activity
 import android.content.Context
+import androidx.navigation.NavController
 import com.facebook.login.LoginManager
-import com.snowmanlabs.test.presentation.HomeActivity
+import com.snowmanlabs.test.R
+import com.snowmanlabs.test.presentation.HomeFragment
 
 interface LoginInterface {
     interface View {
@@ -13,9 +15,8 @@ interface LoginInterface {
     }
 
     interface Router {
-        fun navigate(context: Context) {
-            HomeActivity.launch(context)
-            (context as Activity).finish()
+        fun navigate(navController: NavController) {
+            navController.navigate(R.id.actionUserLogged)
         }
     }
 }
