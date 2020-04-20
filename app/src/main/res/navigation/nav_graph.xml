@@ -9,35 +9,51 @@
         android:id="@+id/splashFragment"
         android:name="com.snowmanlabs.test.presentation.SplashFragment"
         android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash">
-        <action
-            android:id="@+id/actionLogin"
-            app:destination="@id/loginFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out"
-            app:popEnterAnim="@android:anim/fade_in"
-            app:popExitAnim="@android:anim/fade_out"
-            app:popUpTo="@id/nav_graph"
-            app:popUpToInclusive="true" />
-    </fragment>
+        tools:layout="@layout/fragment_splash"/>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.snowmanlabs.test.presentation.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login" />
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.snowmanlabs.test.presentation.HomeFragment"
-        android:label="HomeFragment"
-        tools:layout="@layout/fragment_home" />
     <action
-        android:id="@+id/actionUserLogged"
-        app:destination="@id/homeFragment"
+        android:id="@+id/actionLogin"
+        app:destination="@id/loginFragment"
         app:enterAnim="@android:anim/fade_in"
         app:exitAnim="@android:anim/fade_out"
-        app:launchSingleTop="false"
+        app:popUpTo="@id/mapFragment" />
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="com.snowmanlabs.test.presentation.FavoritesFragment"
+        android:label="favorites_fragment"
+        tools:layout="@layout/favorites_fragment" />
+    <action
+        android:id="@+id/actionFavView"
+        app:destination="@id/favoritesFragment"
+        app:enterAnim="@android:anim/slide_in_left"
+        app:popEnterAnim="@android:anim/slide_in_left"
+        app:popUpTo="@id/mapFragment" />
+    <fragment
+        android:id="@+id/mapFragment"
+        android:name="com.snowmanlabs.test.presentation.MapFragment"
+        tools:layout="@layout/fragment_map"
+        android:label="MapFragment" />
+    <action
+        android:id="@+id/actionMapView"
+        app:destination="@id/mapFragment"
+        app:enterAnim="@android:anim/fade_in"
         app:popEnterAnim="@android:anim/fade_in"
-        app:popExitAnim="@android:anim/fade_out"
         app:popUpTo="@id/nav_graph"
         app:popUpToInclusive="true" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.snowmanlabs.test.presentation.ProfileFragment"
+        android:label="profile_fragment"
+        tools:layout="@layout/profile_fragment" />
+    <action
+        android:id="@+id/actionProfileView"
+        app:destination="@id/profileFragment"
+        app:enterAnim="@anim/slide_in_right"
+        app:popEnterAnim="@anim/slide_in_right"
+        app:popUpTo="@id/mapFragment"
+        app:popUpToInclusive="false" />
 </navigation>

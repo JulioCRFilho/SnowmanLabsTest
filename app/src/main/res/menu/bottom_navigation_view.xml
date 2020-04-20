@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/icStar"
+        android:title="star"
+        android:checked="false"
+        android:icon="@drawable/round_star"
+        />
+    <item
+        android:id="@+id/icMap"
+        android:title="map"
+        android:checked="true"
+        android:icon="@drawable/location_pin"
+        />
+    <item
+        android:id="@+id/icUser"
+        android:title="user"
+        android:checked="false"
+        android:icon="@drawable/user_ic"
+        />
+</menu>

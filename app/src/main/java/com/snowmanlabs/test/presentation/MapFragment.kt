@@ -12,13 +12,15 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.snowmanlabs.test.R
+import com.snowmanlabs.test.utils.bottomBar
 
-class HomeFragment : Fragment(), OnMapReadyCallback {
+class MapFragment : Fragment(), OnMapReadyCallback {
     private lateinit var mapFragment: SupportMapFragment
     private lateinit var mMap: GoogleMap
 
     override fun onCreateView(i: LayoutInflater, v: ViewGroup?, s: Bundle?): View? {
-        return i.inflate(R.layout.fragment_home, v, false)
+        bottomBar(true)
+        return i.inflate(R.layout.fragment_map, v, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

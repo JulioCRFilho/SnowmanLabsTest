@@ -15,6 +15,7 @@ import com.snowmanlabs.test.databinding.FragmentLoginBinding
 import com.snowmanlabs.test.interactor.LoginInterface
 import com.snowmanlabs.test.model.api.Firebase
 import com.snowmanlabs.test.utils.CustomDialog
+import com.snowmanlabs.test.utils.bottomBar
 import com.snowmanlabs.test.viewModel.LoginViewModel
 
 class LoginFragment : Fragment(), LoginInterface.View {
@@ -27,6 +28,7 @@ class LoginFragment : Fragment(), LoginInterface.View {
     }
 
     override fun onCreateView(i: LayoutInflater, v: ViewGroup?, s: Bundle?): View? {
+        bottomBar(false)
         binding = DataBindingUtil.inflate(i, R.layout.fragment_login, v, false)
         binding.viewModel = viewModel
         viewModel.viewInterface = this
