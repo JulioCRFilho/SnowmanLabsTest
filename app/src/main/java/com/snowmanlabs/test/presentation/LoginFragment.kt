@@ -20,7 +20,7 @@ import com.snowmanlabs.test.viewModel.LoginViewModel
 
 class LoginFragment : Fragment(), LoginInterface.View {
     lateinit var viewModel: LoginViewModel
-    lateinit var binding: FragmentLoginBinding
+    private lateinit var binding: FragmentLoginBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,8 +40,7 @@ class LoginFragment : Fragment(), LoginInterface.View {
     }
 
     override fun error(msg: String) {
-        viewModel.viewStatus.value = Pair(1, msg)
-        context?.let { CustomDialog(it, viewModel.viewStatus, this).show() }
+        CustomDialog(requireContext(), msg).show()
     }
 
     override fun success() {

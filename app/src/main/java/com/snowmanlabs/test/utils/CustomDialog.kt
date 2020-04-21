@@ -10,21 +10,17 @@ import androidx.lifecycle.Observer
 import com.snowmanlabs.test.R
 import kotlinx.android.synthetic.main.dialog_loading.*
 
-class CustomDialog(context: Context, private val status: LiveData<Pair<Int, String?>>, private val lifeCycle: LifecycleOwner) :
+class CustomDialog(context: Context, private val msg: String) :
     Dialog(context) {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.dialog_loading)
         window?.setBackgroundDrawableResource(android.R.color.transparent)
 
-        status.observe(lifeCycle, Observer { value ->
-            dialogFlipper.displayedChild = value.first
+        setCancelable(false)
 
-            if (value.first == 2) this.dismiss()
+        failedMsg.text = msg
 
-            value.second.let { msg ->
-                failedMsg.text = msg
-            }
-        })
+        cancelBtn.setOnClickListener { this.dismiss() }
     }
 }

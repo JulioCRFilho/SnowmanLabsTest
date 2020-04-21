@@ -15,8 +15,9 @@
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="wrap_content"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="30dp"
             android:background="#fff"
@@ -28,6 +29,16 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:paddingVertical="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                >
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/searchIcon"
@@ -48,6 +59,7 @@
                     android:layout_marginStart="10dp"
                     android:background="@android:color/transparent"
                     android:hint="Search here"
+                    android:text="@={viewModel.searchQuery}"
                     android:singleLine="true"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -82,6 +94,20 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/divider"
                     app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ListView
+                android:id="@+id/spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:spinnerMode="dialog"
+                tools:listitem="@android:layout/simple_spinner_item"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/constraint"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

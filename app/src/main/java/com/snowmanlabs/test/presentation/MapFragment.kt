@@ -5,26 +5,31 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.Observer
+import androidx.navigation.navGraphViewModels
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.snowmanlabs.test.R
 import com.snowmanlabs.test.databinding.FragmentMapBinding
+import com.snowmanlabs.test.interactor.MapInterface
+import com.snowmanlabs.test.utils.CustomDialog
 import com.snowmanlabs.test.utils.bottomBar
 import com.snowmanlabs.test.viewModel.MapViewModel
+import kotlinx.android.synthetic.main.fragment_map.*
 
-class MapFragment : Fragment(), OnMapReadyCallback {
+class MapFragment : Fragment(), OnMapReadyCallback, MapInterface {
+    private val viewModel by navGraphViewModels<MapViewModel>(R.id.nav_graph)
     private lateinit var mapFragment: SupportMapFragment
-    private lateinit var mMap: GoogleMap
-    private lateinit var viewModel: MapViewModel
     private lateinit var binding: FragmentMapBinding
+    private lateinit var mMap: GoogleMap
 
     override fun onCreateView(i: LayoutInflater, v: ViewGroup?, s: Bundle?): View? {
         bottomBar(true)
-        viewModel = ViewModelProvider(this).get(MapViewModel::class.java)
         binding = DataBindingUtil.inflate(i, R.layout.fragment_map, v, false)
         binding.viewModel = viewModel
         return binding.root
@@ -39,6 +44,15 @@ class MapFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
         viewModel.getLocationPermission(this, mMap)
+        viewModel.autoCompleteSearch(requireContext(), this)
+
+        viewModel.resultLiveData.observe(this, Observer { list ->
+            spinner.adapter = ArrayAdapter(
+                requireContext(),
+                R.layout.adapter_search_result,
+                list
+            )
+        })
     }
 
     override fun onRequestPermissionsResult(r: Int, p: Array<out String>, g: IntArray) {
@@ -48,5 +62,9 @@ class MapFragment : Fragment(), OnMapReadyCallback {
                 activity?.let { viewModel.getInitialMark(it, mMap) }
             }
         }
+    }
+
+    override fun onError(msg: String) {
+        CustomDialog(requireContext(), msg).show()
     }
 }

@@ -15,71 +15,40 @@
         android:elevation="2dp"
         app:cardCornerRadius="20dp">
 
-        <ViewFlipper
-            android:id="@+id/dialogFlipper"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:gravity="center"
+            android:orientation="vertical">
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                app:srcCompat="@android:drawable/ic_delete" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/failedMsg"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_gravity="center"
-                android:orientation="vertical">
+                android:layout_margin="20dp"
+                android:layout_marginTop="20dp"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                tools:text="Request failed with status code 402. Please contact your server provider" />
 
-                <ProgressBar
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:layout_gravity="center"
-                    android:indeterminateTint="#170087"
-                    />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:text="@string/loading"
-                    android:textSize="20sp"
-                    android:textStyle="bold" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <Button
+                android:id="@+id/cancelBtn"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_marginTop="40dp"
-                android:orientation="vertical">
+                android:layout_gravity="end"
+                android:text="@string/ok"
+                android:textColor="#000" />
 
-                <ImageView
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    app:srcCompat="@android:drawable/ic_delete" />
-
-                <com.google.android.material.textview.MaterialTextView
-                    android:id="@+id/failedMsg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="20dp"
-                    android:layout_marginTop="20dp"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    tools:text="Request failed with status code 402. Please contact your server provider" />
-
-                <Button
-                    android:id="@+id/cancelBtn"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:text="@string/ok"
-                    android:textColor="#000" />
-
-            </LinearLayout>
-
-        </ViewFlipper>
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 

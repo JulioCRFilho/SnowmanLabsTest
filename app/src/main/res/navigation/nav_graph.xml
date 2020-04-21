@@ -30,8 +30,10 @@
         android:id="@+id/actionFavView"
         app:destination="@id/favoritesFragment"
         app:enterAnim="@android:anim/slide_in_left"
+        app:launchSingleTop="false"
         app:popEnterAnim="@android:anim/slide_in_left"
-        app:popUpTo="@id/mapFragment" />
+        app:popUpTo="@id/mapFragment"
+        app:popUpToInclusive="false" />
     <fragment
         android:id="@+id/mapFragment"
         android:name="com.snowmanlabs.test.presentation.MapFragment"
@@ -41,6 +43,7 @@
         android:id="@+id/actionMapView"
         app:destination="@id/mapFragment"
         app:enterAnim="@android:anim/fade_in"
+        app:launchSingleTop="true"
         app:popEnterAnim="@android:anim/fade_in"
         app:popUpTo="@id/nav_graph"
         app:popUpToInclusive="true" />
@@ -53,6 +56,7 @@
         android:id="@+id/actionProfileView"
         app:destination="@id/profileFragment"
         app:enterAnim="@anim/slide_in_right"
+        app:launchSingleTop="false"
         app:popEnterAnim="@anim/slide_in_right"
         app:popUpTo="@id/mapFragment"
         app:popUpToInclusive="false" />

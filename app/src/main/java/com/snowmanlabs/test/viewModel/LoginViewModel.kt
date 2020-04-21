@@ -16,8 +16,6 @@ class LoginViewModel : ViewModel(), LoginInterface.Router {
 
     lateinit var viewInterface: LoginInterface.View
 
-    val viewStatus = MutableLiveData<Pair<Int, String?>>(Pair(0, null))
-
     fun signInWithFacebook(view: View) {
         viewInterface.loading(loginManager)
 
