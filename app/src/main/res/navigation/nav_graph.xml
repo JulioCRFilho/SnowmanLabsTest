@@ -30,8 +30,10 @@
         android:id="@+id/actionFavView"
         app:destination="@id/favoritesFragment"
         app:enterAnim="@android:anim/slide_in_left"
+        app:exitAnim="@anim/slide_out_left"
         app:launchSingleTop="false"
         app:popEnterAnim="@android:anim/slide_in_left"
+        app:popExitAnim="@anim/slide_out_left"
         app:popUpTo="@id/mapFragment"
         app:popUpToInclusive="false" />
     <fragment
@@ -56,8 +58,10 @@
         android:id="@+id/actionProfileView"
         app:destination="@id/profileFragment"
         app:enterAnim="@anim/slide_in_right"
+        app:exitAnim="@android:anim/slide_out_right"
         app:launchSingleTop="false"
         app:popEnterAnim="@anim/slide_in_right"
+        app:popExitAnim="@android:anim/slide_out_right"
         app:popUpTo="@id/mapFragment"
         app:popUpToInclusive="false" />
 </navigation>

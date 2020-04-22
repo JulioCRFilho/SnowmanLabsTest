@@ -33,11 +33,19 @@ class BaseActivity : AppCompatActivity() {
             when (it.itemId) {
                 R.id.icStar -> navController.navigate(R.id.actionFavView)
                 R.id.icUser -> navController.navigate(R.id.actionProfileView)
-                R.id.icMap -> navController.navigate(R.id.actionMapView)
+                R.id.icMap -> navController.navigateUp()
             }
             return@setOnNavigationItemSelectedListener true
         }
 
         bottom_navigation.setOnNavigationItemReselectedListener {  }
+    }
+
+    override fun onBackPressed() {
+        if (bottom_navigation.selectedItemId == R.id.icMap) {
+            super.onBackPressed()
+        } else {
+            bottom_navigation.selectedItemId = R.id.icMap
+        }
     }
 }

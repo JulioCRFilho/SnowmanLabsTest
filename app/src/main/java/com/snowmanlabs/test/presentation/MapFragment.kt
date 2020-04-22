@@ -1,22 +1,30 @@
 package com.snowmanlabs.test.presentation
 
+import android.app.Activity
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.util.Log.d
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.navigation.navGraphViewModels
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.material.bottomnavigation.BottomNavigationMenu
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.snowmanlabs.test.R
 import com.snowmanlabs.test.databinding.FragmentMapBinding
 import com.snowmanlabs.test.interactor.MapInterface
+import com.snowmanlabs.test.presentation.adapter.AutoCompleteAdapter
 import com.snowmanlabs.test.utils.CustomDialog
 import com.snowmanlabs.test.utils.bottomBar
 import com.snowmanlabs.test.viewModel.MapViewModel
@@ -47,11 +55,16 @@ class MapFragment : Fragment(), OnMapReadyCallback, MapInterface {
         viewModel.autoCompleteSearch(requireContext(), this)
 
         viewModel.resultLiveData.observe(this, Observer { list ->
-            spinner.adapter = ArrayAdapter(
-                requireContext(),
-                R.layout.adapter_search_result,
-                list
-            )
+            with(recyclerView) {
+                setHasFixedSize(true)
+                layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
+                adapter = AutoCompleteAdapter(list) { id ->
+                    searchField.setText("")
+                    val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                    imm.hideSoftInputFromWindow(view?.windowToken, 0)
+                    viewModel.fetchPlace(id, mMap)
+                }
+            }
         })
     }
 
