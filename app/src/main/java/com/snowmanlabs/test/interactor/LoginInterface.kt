@@ -5,7 +5,7 @@ import com.facebook.login.LoginManager
 import com.snowmanlabs.test.R
 
 interface LoginInterface {
-    interface View {
+    interface UI {
         fun loading(loginManager: LoginManager)
         fun error(msg: String)
         fun success()
@@ -13,7 +13,7 @@ interface LoginInterface {
 
     interface Router {
         fun navigate(navController: NavController) {
-            navController.navigate(R.id.actionMapView)
+            navController.navigate(R.id.actionProfileView)
         }
     }
 }

@@ -21,19 +21,21 @@ import com.google.android.libraries.places.api.model.*
 import com.google.android.libraries.places.api.net.*
 import com.snowmanlabs.test.R
 import com.snowmanlabs.test.interactor.MapInterface
+import com.snowmanlabs.test.model.api.Firebase
 import com.snowmanlabs.test.model.entity.CustomLocation
 
 class MapViewModel : ViewModel() {
     val ACCESS_CODE = 101
     val searchQuery = MutableLiveData("")
     val resultLiveData = MutableLiveData<List<AutocompletePrediction>>()
-    var selectedLocation: CustomLocation? = null
-    lateinit var places: PlacesClient
+    val statusLiveData = MutableLiveData<Pair<Int, String?>>()
+    var selectedLocation: ArrayList<CustomLocation?> = ArrayList()
 
     private val token = AutocompleteSessionToken.newInstance()
 
     lateinit var myLoc: Location
-    lateinit var mapInterface: MapInterface
+    lateinit var places: PlacesClient
+    lateinit var interactor: MapInterface.UI
 
     private val autoCompleteLocation = FindAutocompletePredictionsRequest
         .builder()
@@ -89,7 +91,7 @@ class MapViewModel : ViewModel() {
                 .addOnSuccessListener { response ->
                     resultLiveData.value = response.autocompletePredictions
                 }.addOnFailureListener { exception ->
-                    exception.message?.let { msg -> mapInterface.onError(msg) }
+                    exception.message?.let { msg -> interactor.onError(msg) }
                 }
         })
     }
@@ -100,20 +102,23 @@ class MapViewModel : ViewModel() {
             Place.Field.ADDRESS,
             Place.Field.PHOTO_METADATAS,
             Place.Field.LAT_LNG,
-            Place.Field.RATING
+            Place.Field.RATING,
+            Place.Field.TYPES
         )
         val fetch = FetchPlaceRequest.newInstance(id, fields)
 
         places.fetchPlace(fetch).addOnCompleteListener {
             if (it.isSuccessful) {
                 it.result?.place?.let { place ->
-                    selectedLocation = CustomLocation(
+                    selectedLocation.add(CustomLocation(
                         place.id,
                         place.name,
                         place.address,
                         place.rating,
-                        place.photoMetadatas?.get(0)?.let { it1 -> fetchPhoto(it1) }
-                    )
+                        place.photoMetadatas?.get(0)?.let { it1 -> fetchPhoto(it1) },
+                        "m${selectedLocation.size + 1}",
+                        place.types
+                    ))
 
                     place.latLng?.let { latLng ->
                         setMarker(mMap, latLng, place.name)
@@ -121,24 +126,24 @@ class MapViewModel : ViewModel() {
                     }
                 }
             } else {
-                it.exception?.message?.let { msg -> mapInterface.onError(msg) }
+                it.exception?.message?.let { msg -> interactor.onError(msg) }
             }
         }.addOnFailureListener { exception ->
-            exception.message?.let { msg -> mapInterface.onError(msg) }
+            exception.message?.let { msg -> interactor.onError(msg) }
         }
     }
 
     private fun fetchPhoto(meta: PhotoMetadata): Bitmap? {
         var bitmap: Bitmap? = null
-        val fetch = FetchPhotoRequest.newInstance(meta)
+        val fetch = FetchPhotoRequest.builder(meta).build()
         places.fetchPhoto(fetch).addOnCompleteListener {
             if (it.isSuccessful) {
                 bitmap = it.result?.bitmap
             } else {
-                it.exception?.message?.let { msg -> mapInterface.onError(msg) }
+                it.exception?.message?.let { msg -> interactor.onError(msg) }
             }
         }.addOnFailureListener { exception ->
-            exception.message?.let { msg -> mapInterface.onError(msg) }
+            exception.message?.let { msg -> interactor.onError(msg) }
         }
         return bitmap
     }

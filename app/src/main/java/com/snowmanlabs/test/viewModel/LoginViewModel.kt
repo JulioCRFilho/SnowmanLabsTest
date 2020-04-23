@@ -1,7 +1,6 @@
 package com.snowmanlabs.test.viewModel
 
 import android.view.View
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.facebook.*
 import com.facebook.login.LoginManager
@@ -14,7 +13,7 @@ class LoginViewModel : ViewModel(), LoginInterface.Router {
     val facebookCallback: CallbackManager = CallbackManager.Factory.create()
     private val loginManager = LoginManager.getInstance()
 
-    lateinit var viewInterface: LoginInterface.View
+    lateinit var viewInterface: LoginInterface.UI
 
     fun signInWithFacebook(view: View) {
         viewInterface.loading(loginManager)

@@ -14,11 +14,11 @@ import com.snowmanlabs.test.R
 import com.snowmanlabs.test.databinding.FragmentLoginBinding
 import com.snowmanlabs.test.interactor.LoginInterface
 import com.snowmanlabs.test.model.api.Firebase
-import com.snowmanlabs.test.utils.CustomDialog
+import com.snowmanlabs.test.utils.InteractorDialog
 import com.snowmanlabs.test.utils.bottomBar
 import com.snowmanlabs.test.viewModel.LoginViewModel
 
-class LoginFragment : Fragment(), LoginInterface.View {
+class LoginFragment : Fragment(), LoginInterface.UI {
     lateinit var viewModel: LoginViewModel
     private lateinit var binding: FragmentLoginBinding
 
@@ -36,11 +36,11 @@ class LoginFragment : Fragment(), LoginInterface.View {
     }
 
     override fun loading(loginManager: LoginManager) {
-        loginManager.logInWithReadPermissions(this, listOf("public_profile", "email"))
+        loginManager.logInWithReadPermissions(this, listOf("email", "public_profile"))
     }
 
     override fun error(msg: String) {
-        CustomDialog(requireContext(), msg).show()
+        InteractorDialog(requireContext(), msg).show()
     }
 
     override fun success() {

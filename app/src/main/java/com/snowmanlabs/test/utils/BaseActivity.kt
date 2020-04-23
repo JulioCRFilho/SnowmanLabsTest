@@ -2,14 +2,10 @@ package com.snowmanlabs.test.utils
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log.d
-import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.multidex.MultiDex
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import com.google.android.material.bottomnavigation.BottomNavigationMenu
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.snowmanlabs.test.R
 import kotlinx.android.synthetic.main.activity_base.*
 
@@ -29,16 +25,21 @@ class BaseActivity : AppCompatActivity() {
         bottom_navigation.selectedItemId = R.id.icMap
 
         bottom_navigation.setOnNavigationItemSelectedListener {
-            d("tatata", it.itemId.toString())
             when (it.itemId) {
                 R.id.icStar -> navController.navigate(R.id.actionFavView)
-                R.id.icUser -> navController.navigate(R.id.actionProfileView)
+                R.id.icUser -> validateUser()
                 R.id.icMap -> navController.navigateUp()
             }
             return@setOnNavigationItemSelectedListener true
         }
 
-        bottom_navigation.setOnNavigationItemReselectedListener {  }
+        bottom_navigation.setOnNavigationItemReselectedListener { }
+    }
+
+    private fun validateUser() {
+        validateLogin(navController).let { user ->
+            if (user) navController.navigate(R.id.actionProfileView)
+        }
     }
 
     override fun onBackPressed() {

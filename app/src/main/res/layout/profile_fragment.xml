@@ -1,13 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".presentation.ProfileFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <data>
+        <import type="com.google.firebase.auth.FirebaseUser" />
+        <variable
+            name="viewModel"
+            type="com.snowmanlabs.test.viewModel.ProfileViewModel" />
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="20dp"
+        tools:context=".presentation.ProfileFragment">
 
-</FrameLayout>
+        <ImageView
+            android:id="@+id/userPhoto"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="80dp"
+            android:src="@{viewModel.user.photoUrl}"
+            android:background="@drawable/bg_rectangular"
+            tools:src="@android:mipmap/sym_def_app_icon" />
+
+        <TextView
+            android:id="@+id/userName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:text='@{viewModel.user.displayName ?? "Nome não informado"}'
+            tools:text="Nome do usuário" />
+
+        <TextView
+            android:id="@+id/userEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:text='@{viewModel.user.email ?? "Email não informado"}'
+            tools:text="Email do usuário" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/recoverPass"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:onClick="@{viewModel::userChangePass}"
+            android:text="Alterar senha"
+            app:strokeColor="@android:color/black"
+            app:strokeWidth="2dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/loggout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp"
+            android:onClick="@{viewModel::userLogout}"
+            android:text="Deslogar"
+            app:strokeColor="@android:color/black"
+            app:strokeWidth="2dp" />
+
+    </LinearLayout>
+</layout>
